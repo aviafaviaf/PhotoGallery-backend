@@ -5,6 +5,7 @@ const JWT_SECRET = process.env.JWT_SECRET || 'default_secret';
 
 export interface AuthRequest extends Request {
   user?: { id: number; email: string };
+  file?: Express.Multer.File;
 }
 
 export const authenticateToken = (req: AuthRequest, res: Response, next: NextFunction): void => {
