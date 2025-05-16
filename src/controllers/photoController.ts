@@ -254,8 +254,9 @@ export const deleteComment = async (req: AuthRequest, res: Response): Promise<vo
   }
 };
 
-export const photoDetails = async (req: Request, res: Response): Promise<void> => {
+export const photoDetails = async (req: AuthRequest, res: Response): Promise<void> => {
   const photoId = parseInt(req.params.id, 10);
+  const currentUserId = req.user?.id || null;
 
   try {
     const photoResult = await pool.query(
@@ -272,6 +273,11 @@ export const photoDetails = async (req: Request, res: Response): Promise<void> =
     }
 
     const photo = photoResult.rows[0];
+
+    if (!photo.is_published && photo.user_id !== currentUserId) {
+      res.status(403).json({ error: 'Доступ запрещён: фото не опубликовано' });
+      return;
+    }
 
     const commentsResult = await pool.query(
       `SELECT comments.id, comments.content, comments.created_at, users.username, comments.user_id
