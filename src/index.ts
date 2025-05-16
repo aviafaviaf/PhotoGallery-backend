@@ -4,16 +4,11 @@ import dotenv from 'dotenv';
 import { pool } from './db.js';
 import authRoutes from './routes/authRoutes.js';
 import photoRoutes from './routes/photoRoutes.js';
-import { fileURLToPath } from 'url';
-import path from 'path';
-import { dirname } from 'path';
 
 dotenv.config();
 
 const app = express();
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
 
 app.use(cors({
   origin: 'https://photogallery-frontend.onrender.com',
@@ -22,8 +17,6 @@ app.use(cors({
 app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/photos', photoRoutes);
-
-app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
 
 app.get('/', (req, res) => {
   res.send('API is running');

@@ -9,14 +9,14 @@ export const uploadPhoto = async (req: AuthRequest, res: Response): Promise<void
       return;
     }
 
-    const { filename } = req.file;
+    const { path: imageUrl } = req.file;
     const { title } = req.body;
     const userId = req.user?.id;
     const is_published = req.body.is_published === 'true';
 
     const result = await pool.query(
       'INSERT INTO photos (url, title, user_id, is_published) VALUES ($1, $2, $3, $4) RETURNING *',
-      [`/uploads/${filename}`, title, userId, is_published]
+      [imageUrl, title, userId, is_published]
     );
 
     res.status(201).json(result.rows[0]);

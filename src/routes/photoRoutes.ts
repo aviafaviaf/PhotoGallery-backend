@@ -3,22 +3,13 @@ import multer from 'multer';
 import { uploadPhoto, getPhotos, getMyPhotos, deletePhoto, getPhotosByUser,
     togglePublishStatus, addFavorite, removeFavorite, getFavorites,
     getCommentsByPhoto, addComment, deleteComment, photoDetails } from '../controllers/photoController.js';
+import { cloudinaryUpload } from '../middleware/cloudinaryUpload.js';
 import { authenticateToken } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
 
-
-const storage = multer.diskStorage({
-  destination: 'uploads/',
-  filename: (req: express.Request, file: Express.Multer.File, cb: (error: Error | null, filename: string) => void) => {
-    cb(null, `${Date.now()}-${file.originalname}`);
-  },
-});
-
-const upload = multer({ storage });
-
-router.post('/upload', authenticateToken, upload.single('photo'), uploadPhoto);
+router.post('/upload', authenticateToken, cloudinaryUpload.single('photo'), uploadPhoto);
 router.delete('/:id', authenticateToken, deletePhoto);
 router.get('/', getPhotos);
 router.get('/my', authenticateToken, getMyPhotos);
