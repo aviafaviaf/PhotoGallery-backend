@@ -296,3 +296,4 @@ export const photoDetails = async (req: AuthRequest, res: Response): Promise<voi
     res.status(500).json({ error: 'Ошибка при получении данных фото', details: err });
   }
 };
+

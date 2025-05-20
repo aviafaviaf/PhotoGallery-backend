@@ -1,5 +1,4 @@
 import express from 'express';
-import multer from 'multer';
 import { uploadPhoto, getPhotos, getMyPhotos, deletePhoto, getPhotosByUser,
     togglePublishStatus, addFavorite, removeFavorite, getFavorites,
     getCommentsByPhoto, addComment, deleteComment, photoDetails } from '../controllers/photoController.js';
