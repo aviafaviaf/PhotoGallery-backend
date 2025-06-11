@@ -4,12 +4,18 @@ import jwt from 'jsonwebtoken';
 import { pool } from '../db.js';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'default_secret';
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export const register = async (req: Request, res: Response): Promise<void> => {
   const { email, password, username } = req.body;
 
   if (!email || !password || !username) {
     res.status(400).json({ message: 'Email, пароль и имя пользователя обязательны' });
+    return;
+  }
+
+  if (!emailRegex.test(email)) {
+    res.status(400).json({ message: 'Некорректный формат email' });
     return;
   }
 
