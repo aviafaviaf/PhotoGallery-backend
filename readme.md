@@ -9,10 +9,6 @@
 - JWT аутентификация
 - Cloudinary для хранения изображений
 
-## Деплой
-Проект доступен по url:
-https://photogallery-backend-2s77.onrender.com
-
 ## Установка
 1. Клонировать репозиторий:
 `git clone https://github.com/aviafaviaf/PhotoGallery-backend.git`
