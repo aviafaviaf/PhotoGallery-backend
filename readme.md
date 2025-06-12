@@ -22,6 +22,7 @@ https://photogallery-backend-2s77.onrender.com
 `npm install`
 
 3. Создать файл `.env` со следующими переменными:
+```
 PORT=5000
 DB_HOST=db_host
 DB_PORT=db_port
@@ -31,7 +32,7 @@ DB_NAME=db_name
 CLOUDINARY_CLOUD_NAME=cloud_name
 CLOUDINARY_API_KEY=api_key
 CLOUDINARY_API_SECRET=api_secret
-
+```
 4. Запустить сервер:
 `npm run dev` или
 `npm start` 
@@ -61,6 +62,7 @@ CLOUDINARY_API_SECRET=api_secret
 - `DELETE /api/photos/comments/:id` - Удалить комментарий (требуется аутентификация)
 
 ## Структура проекта
+```
 BACKEND/
 ├── src/ # Исходный код
 │ ├── controllers/ # Контроллеры
@@ -78,3 +80,4 @@ BACKEND/
 │ └── index.ts # Точка входа
 ├── package.json
 └── tsconfig.json
+```
